@@ -1,5 +1,7 @@
-import { getByText, render } from "@testing-library/react"
+import { fireEvent, getByText, render } from "@testing-library/react"
 import Launch from "./Launch"
+import { act } from "react-dom/test-utils";
+import userEvent from '@testing-library/user-event';
 
 describe(Launch, () => {
 
@@ -13,11 +15,11 @@ describe(Launch, () => {
         const {getByText} = render(<Launch />)
         const paragraph = getByText("Text here")
         expect(paragraph).toBeInTheDocument()
-    })
+    });
 
-    it("Have a button that brings you to the homepage", () => {
+    it("Have a button on the page", () => {
         const {getByRole} = render(<Launch />)
         const findButton = getByRole("button", {name: "Find"})
         expect(findButton).toBeInTheDocument()
-    })
+    });
 })
