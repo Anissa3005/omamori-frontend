@@ -28,6 +28,7 @@ function Launch() {
                     </div>
                 </div>
                 <div className="container-button">
+                    <p>Find omamori</p>
                     <div className="container-arrow" >
                         <button className="findButton" onClick={handleGoToHome}></button>
                         <div className="arrow"></div>

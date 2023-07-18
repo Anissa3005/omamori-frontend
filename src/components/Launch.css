@@ -54,6 +54,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
 .findButton {
@@ -107,22 +108,21 @@
     100% {left: 0;}
 }
 
+@media screen and (min-width: 1000px){
+    .container-paragraph {
+        width: 30em;
+        height: 20em;
+        padding: 1em;
+        justify-content: center;
+        margin-bottom: 3em;
+        background-color: #AFE1AF;
+    }
 
-/* .arrow {
-    display: flex;
-    align-items: center;
+    .overlap-shape {
+        width: 30em;
+        height: 20em;
+        position: absolute;
+        top: 15em;
+        background-color: rgb(8, 143, 143, 0.33)
+    }
 }
-
-.rectangle {
-    background-color: black;
-    width: 3em;
-    height: 1em;
-}
-
-.triangle {
-    width: 0;
-    height: 0;
-    border-bottom: 20px solid transparent;
-    border-top: 20px solid transparent;
-    border-left: 20px solid black;
-} */
