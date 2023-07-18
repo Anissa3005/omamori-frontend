@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,400&display=swap');
 /* font-family: 'Lora', serif; */
-
+:root {
+    --light-green: #AFE1AF;
+    --dark-green: rgb(8, 143, 143, 0.33);
+}
 * {
     margin: 0;
     padding: 0;
@@ -102,6 +105,7 @@
     transform: rotate(-45deg);
 }
 
+
 @keyframes arrowA {
     0% {left: 0;}
     50% {left: 10px;}
@@ -122,7 +126,13 @@
         width: 30em;
         height: 20em;
         position: absolute;
-        top: 15em;
+        top: 16em;
         background-color: rgb(8, 143, 143, 0.33)
+    }
+
+    .title {
+        font-family: 'Lora', serif;
+        font-size: 50px;
+        margin-bottom: 1em;
     }
 }

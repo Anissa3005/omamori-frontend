@@ -14,7 +14,7 @@ function Launch() {
         return <Navigate to={"/home"} />
     }
 
-    function handleGoToHome() {
+    function handleGoToHome():void {
         setGoToHome(!goToHome)
     }
 
@@ -29,7 +29,7 @@ function Launch() {
                 </div>
                 <div className="container-button">
                     <p>Find omamori</p>
-                    <div className="container-arrow" >
+                    <div className="container-arrow" onClick={handleGoToHome}>
                         <button className="findButton" onClick={handleGoToHome}></button>
                         <div className="arrow"></div>
                     </div>

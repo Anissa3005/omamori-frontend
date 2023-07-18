@@ -1,0 +1,33 @@
+header {
+    width: 100vw;
+    height: 3.5em;
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+    background-color: var(--light-green);
+}
+
+.header-title {
+    margin-right: 12em;
+    font-size: 16px;
+}
+
+/* nav {
+    border: 1px solid red;
+} */
+
+.nav-list {
+    display: flex;
+
+}
+
+.login-li {
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    list-style: none;
+    padding: 0.25em;
+}
+
+/* .not-login-li {
+    margin-left: 11em;
+} */
