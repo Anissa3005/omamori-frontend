@@ -3,7 +3,7 @@
 /* font-family: 'Lora', serif; */
 :root {
     --light-green: #AFE1AF;
-    --dark-green: rgb(8, 143, 143, 0.33);
+    --dark-green: rgb(8, 143, 143);
 }
 * {
     margin: 0;
