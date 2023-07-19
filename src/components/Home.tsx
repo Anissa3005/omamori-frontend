@@ -11,21 +11,20 @@ function Home() {
         <div>
             <header>
                 <h2 className="header-title">Omamori Finder</h2>
-                {hamburger ? (
                     <FontAwesomeIcon onClick={() => setHamburger(!hamburger)} className="hamburger-menu" icon={faBars} />
-                ) : 
-                (   
-                    <div className="side-menu">
+                    <div className="side-menu" style={!hamburger ? {width: '60%'} : {width: 0, border: "none"}}>
                         <div className="xmark-container">
                             <FontAwesomeIcon className="xmark"  onClick={() => setHamburger(!hamburger)} icon={faXmark} /> 
                         </div>
                         <ul className="nav-list">
-                            <li className="menu-list">Login</li>
-                            <li className="menu-list">About</li>
+                            <li className="nav-topic">Login</li>
+                            <li className="nav-topic">About</li>
                         </ul>
                     </div> 
-                )
-                }
+                <ul className="nav-list-desktop">
+                    <li className="nav-topic">Login</li>
+                    <li className="nav-topic">About</li>
+                </ul>
             </header>
         </div>
     )

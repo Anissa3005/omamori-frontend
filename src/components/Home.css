@@ -1,15 +1,18 @@
 header {
     width: 100vw;
-    height: 3.5em;
+    min-height: 3.5em;
     padding: 0.25em;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: var(--light-green);
+    border-bottom: 3.5px solid var(--dark-green);
 }
 
 .header-title {
-    margin-right: 12em;
-    font-size: 16px;
+    margin-left: 1em;
+    font-size: 15px;
+    font-family:'Lora', serif;
 }
 
 nav {
@@ -19,23 +22,35 @@ nav {
 
 .hamburger-menu {
     font-size: 22px;
+    margin-right: 1em;
 }
 
 .side-menu {
-    height: 100vh;
+    min-height: 100vh;
     width: 60%;
-    background-color: antiquewhite;
     position: fixed;
     top: 0;
     right: 0;
-    background-color: var(--light-green);
-    border-left: 5px solid var(--dark-green);
+    background-color: white;
+    border-left: 8px solid var(--dark-green);
+    transition: all 0.5s ease-in-out;
+}
+
+.no-side-menu {
+    display: none;
+}
+
+.xmark-container {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em 1em 0 1em;
+    transition: all 0.5s ease-in-out;
 }
 
 .xmark {
-    position: fixed;
-    right: 0;
-    margin: 1em;
+    font-size: 22px;
+
 }
 
 .nav-list {
@@ -43,15 +58,34 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    /* border: 1px solid red; */
+    padding: 1em;
+    /* transition: all 0.5s; */
 }
 
-.menu-list {
-    font-size: 12px;
+.nav-topic {
+    font-size: 16px;
     font-family: 'Open Sans', sans-serif;
     list-style: none;
-    margin-bottom: 0.25em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid black;
 }
 
-/* .not-login-li {
-    margin-left: 11em;
-} */
+.nav-list-desktop {
+    display: none;
+}
+
+@media screen and (min-width: 1000px) {
+    .hamburger-menu {
+        display: none;
+    }
+
+    .xmark-container {
+        display: none;
+    }
+
+   .nav-list-desktop {
+        display: flex;
+        margin-right: 1em;
+   }
+}
