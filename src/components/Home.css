@@ -45,7 +45,7 @@ nav {
     display: flex;
     justify-content: flex-end;
     padding: 1em 1em 0 1em;
-    transition: all 0.5s ease-in-out;
+    transition: 1s ease-in-out;
 }
 
 .xmark {
@@ -59,8 +59,7 @@ nav {
     justify-content: flex-start;
     align-items: flex-start;
     /* border: 1px solid red; */
-    padding: 1em;
-    /* transition: all 0.5s; */
+    padding: 1em; 
 }
 
 .nav-topic {
@@ -92,20 +91,23 @@ nav {
     }
 
    .header-title {
-    margin-left: 1em;
-    font-size: 25px;
-    font-family:'Lora', serif;
+        margin-left: 1em;
+        font-size: 25px;
+        font-family:'Lora', serif;
     }
 
    .nav-topic {
-    font-size: 20px;
-    font-family: 'Open Sans', sans-serif;
-    list-style: none;
-    margin: 0.50em;
+        font-size: 20px;
+        font-family: 'Open Sans', sans-serif;
+        list-style: none;
+        margin: 0.50em;
    } 
 
    .nav-topic:hover {
-    background-color: var(--dark-green);
-    cursor: pointer;
+        font-size: 21px;
+        font-weight: bold;
+        border-bottom: 3px solid var(--dark-green);
+        cursor: pointer;
+        transition: 0.3s ease-in;
    }
 }
