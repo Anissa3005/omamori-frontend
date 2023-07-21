@@ -32,6 +32,7 @@ nav {
     top: 0;
     right: 0;
     background-color: white;
+    z-index: 7;
     overflow-x: hidden;
     border-left: 8px solid var(--dark-green);
     transition: all 0.5s ease-in-out;

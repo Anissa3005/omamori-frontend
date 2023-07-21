@@ -5,10 +5,10 @@ import Map from "./Map"
 
 function Home() {
     return (
-        <>
+        <div>
         <Navbar />
         <Map />
-        </>
+        </div>
         
 
     )
