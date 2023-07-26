@@ -8,7 +8,11 @@ function Login() {
     if (signUp) {
         return <Navigate to={"/signup"} />
     }
-    
+
+    const login =async () => {
+        
+    }
+
     return (
         <>
         <Navbar />
