@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Navigate } from "react-router-dom";
+import Login from "./Login";
 import "./Navbar.css";
 
 
 function Home() {
     const [isLogin, setIsLogin] = useState<boolean>(true)
     const [hamburger, setHamburger] = useState<boolean>(true)
+    const [login, setLogin] = useState<boolean>(false)
+
+    if (login) {
+        return <Navigate to={"/login"} />
+    }
+
     return (
         <div>
             <header>
@@ -17,7 +25,7 @@ function Home() {
                             <FontAwesomeIcon className="xmark"  onClick={() => setHamburger(!hamburger)} icon={faXmark} /> 
                         </div>
                         <ul className="nav-list">
-                            <li className="nav-topic">Login</li>
+                            <li className="nav-topic" onClick={() => setLogin(!login) }>Login</li>
                             <li className="nav-topic">About</li>
                         </ul>
                     </div> 
