@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import {auth} from "../firebase-config"
-import { usePostUser } from "../hooks/post";
+import { UseGetUser } from "../hooks/post";
 
 interface User {
     username: string,
@@ -16,6 +16,7 @@ function SignUp() {
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [errorExist, setErrorExist] = useState<boolean>(false)
 
     const createPostUser = useMutation({
         mutationKey: ['user'],
@@ -24,6 +25,15 @@ function SignUp() {
             return data
         }
     })
+    
+    const {data} = UseGetUser();
+
+    console.log(data)
+
+    const handleUsername = () => {
+        console.log("change")
+    }
+    
 
 
     const handleSignUp = async(e: React.MouseEvent): Promise<any> => {
@@ -39,21 +49,24 @@ function SignUp() {
         console.log(register)
       
         } catch (error: any) {
-            throw new Error(error)
+            if (error.code === "auth/email-already-in-use") {
+                setErrorExist(!errorExist);
+            }
+            console.log(`Failed with error code ${error.code}`)
+            console.log(error.message)
         }
     }
 
-  
-
-    
+   
     return (
         <>
             <Navbar />
             <h1>Sign up page</h1>
+            {errorExist && (<p>User already exist</p>)}
             <form>
                 <div>
                     <label>username</label>
-                    <input type="text" onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" onChange={handleUsername}/>
                 </div>
                 <div>
                     <label>email</label>

@@ -17,3 +17,13 @@ export const usePostUser = (body: User) => {
 
     return {data, isLoading}
 }
+
+export const UseGetUser = () => {
+    return useQuery({
+        queryKey: ['getuser'],
+        queryFn: async() => {
+            const {data} = await axios.get('http://127.0.0.1:8000/user/')
+            return data
+        }
+    })
+}
