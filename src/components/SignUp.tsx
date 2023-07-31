@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -18,6 +18,10 @@ function SignUp() {
     const [password, setPassword] = useState<string>('');
     const [errorExist, setErrorExist] = useState<boolean>(false)
 
+    // useEffect(() => {
+    //     console.log(username);
+    // }, [username])
+
     const createPostUser = useMutation({
         mutationKey: ['user'],
         mutationFn: async(body: User ) => {
@@ -26,13 +30,16 @@ function SignUp() {
         }
     })
     
-    const {data} = UseGetUser();
+    const {data, isError, refetch} = UseGetUser(username);
 
-    console.log(data)
 
-    const handleUsername = () => {
-        console.log("change")
-    }
+    const handleUsername = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        let input: string = e.target.value
+
+        setUsername(input);
+
+        if (input.length > 2) refetch();
+    };
     
 
 

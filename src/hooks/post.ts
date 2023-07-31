@@ -18,11 +18,13 @@ export const usePostUser = (body: User) => {
     return {data, isLoading}
 }
 
-export const UseGetUser = () => {
+export const UseGetUser = (username: string) => {
+    console.log('username for axios url:', `http://127.0.0.1:8000/user/${username}/`);
     return useQuery({
-        queryKey: ['getuser'],
+        queryKey: ['getuser', username],
+        enabled: false,
         queryFn: async() => {
-            const {data} = await axios.get('http://127.0.0.1:8000/user/')
+            const {data} = await axios.get(`http://127.0.0.1:8000/user/${username}/`)
             return data
         }
     })
