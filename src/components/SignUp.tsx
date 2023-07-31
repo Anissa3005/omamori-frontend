@@ -30,10 +30,11 @@ function SignUp() {
         }
     })
     
+    // CHECK IF USERNAME IS TAKEN OR NOT
     const {data, isError, refetch} = UseGetUser(username);
-
-
+    console.log(data)
     const handleUsername = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        e.preventDefault();
         let input: string = e.target.value
 
         setUsername(input);
