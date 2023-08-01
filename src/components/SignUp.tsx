@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import {auth} from "../firebase-config"
 import { UseGetUser } from "../hooks/post";
+import "./SignUp.css"
 
 interface User {
     username: string,
@@ -16,7 +17,8 @@ function SignUp() {
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [errorExist, setErrorExist] = useState<boolean>(false)
+    const [errorExist, setErrorExist] = useState<boolean>(false);
+    const [usernameExist, setUsernameExist] = useState<boolean>(false);
 
     // useEffect(() => {
     //     console.log(username);
@@ -32,14 +34,11 @@ function SignUp() {
     
     // CHECK IF USERNAME IS TAKEN OR NOT
     const {data, isError, refetch} = UseGetUser(username);
-    console.log(data)
+
     const handleUsername = (e: React.ChangeEvent<HTMLInputElement>): void => {
         e.preventDefault();
         let input: string = e.target.value
-
         setUsername(input);
-
-        if (input.length > 2) refetch();
     };
     
 
@@ -48,14 +47,19 @@ function SignUp() {
         e.preventDefault()
         console.log("signup clicked");
         try {
+        //  CHECK IF USERNAME ALREADY TAKEN BEFORE SIGNING UP
+        refetch();
+        if (!isError) return setUsernameExist(!usernameExist);
+        
+        // MAKING POST REQ TO FIREBASE
         const register = await createUserWithEmailAndPassword(auth, email, password);
+
+        // MAKING POST REQ TO BACKEND
         createPostUser.mutate({
             username: username,
             email: email
         })
 
-        console.log(register)
-      
         } catch (error: any) {
             if (error.code === "auth/email-already-in-use") {
                 setErrorExist(!errorExist);
@@ -74,11 +78,11 @@ function SignUp() {
             <form>
                 <div>
                     <label>username</label>
-                    <input type="text" onChange={handleUsername}/>
+                    <input className={usernameExist ? "input-error" : "username-input"} type="text" onChange={handleUsername}/>
                 </div>
                 <div>
                     <label>email</label>
-                    <input type="email" onChange={(e) => setEmail(e.target.value)}/>
+                    <input className={errorExist ? "input-error" : "input"} type="email" onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div>
                     <label>password</label>
