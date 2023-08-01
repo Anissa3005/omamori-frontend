@@ -20,6 +20,7 @@ function SignUp() {
     const [errorExist, setErrorExist] = useState<boolean>(false);
     const [usernameExist, setUsernameExist] = useState<boolean>(false);
     const [weakPassword, setWeakPassword] = useState<boolean>(false);
+    const [emptyFields, setEmptyFields] = useState<boolean>(false);
 
     // useEffect(() => {
     //     console.log(username);
@@ -41,6 +42,7 @@ function SignUp() {
         let input: string = e.target.value
         setUsername(input);
     };
+
     
 
 
@@ -48,6 +50,8 @@ function SignUp() {
         e.preventDefault()
         console.log("signup clicked");
         try {
+        const emptyFields = checkEmptyFields(password, email, username);
+        if (!emptyFields) return;
         //  CHECK IF USERNAME ALREADY TAKEN BEFORE SIGNING UP
         refetch();
         if (!isError) {
@@ -78,27 +82,38 @@ function SignUp() {
         }
     }
 
+    const checkEmptyFields = (password: string, email: string, username: string) => {
+        if (password == "" || email == "" || username == "") {
+            setEmptyFields(!emptyFields)
+            return false;
+        }
+       return true; 
+    }
+
    
     return (
         <>
             <Navbar />
             <div className="form-container">
                 <h1>Sign up page</h1>
-                {errorExist && (<p>User already exist</p>)}
                 <form>
                     <div className="inputfield">
                         {/* <label>username</label> */}
-                        <input className={usernameExist ? "input-error" : "input"} type="text" onChange={handleUsername} placeholder="Username"/>
+                        {usernameExist && (<p className="error-message">*This username is already taken</p>)}
+                        <input className={usernameExist ? "input-error" : "input"} type="text" onChange={handleUsername} placeholder="Username" required/>
                     </div>
                     <div className="inputfield">
                         {/* <label>email</label> */}
-                        <input className={errorExist ? "input-error" : "input"} type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+                        {errorExist && (<p className="error-message">*This email adress is already taken</p>)}
+                        <input className={errorExist ? "input-error" : "input"} type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" required/>
                     </div>
                     <div className="inputfield">
                         {/* <label>password</label> */}
-                        <input className={weakPassword ? "input-error" : "input"} type= "password" onChange={(e) => setPassword(e.target.value)} placeholder="Password"/>
+                        {weakPassword && (<p className="error-message">*Password is weak</p>)}
+                        <input className={weakPassword ? "input-error" : "input"} type= "password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" required/>
                     </div>
-                    <button className="signup-button" onClick={handleSignUp}>Sign up</button>
+                    {/* <button className="signup-button" onClick={handleSignUp}>Sign up</button> */}
+                    <input type="submit" className="signup-button" onClick={handleSignUp} value="Sign up"/>
                 </form>
             </div>
         </>
