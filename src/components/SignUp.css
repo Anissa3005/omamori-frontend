@@ -1,5 +1,26 @@
-.input-error {
-   
+.form-container {
+    border: 1px black solid;
+    margin-top: 1em;
+}
+form {
+    border: 1px red solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 3em;
+}
+
+.input {
+   margin-bottom: 3em; 
+   height: 3em;
+   width: 18em
+}
+
+.input-error { 
    border: 2px red solid;
 }
 
+.signup-button {
+    width: 5em;
+}
