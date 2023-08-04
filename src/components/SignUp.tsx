@@ -73,7 +73,7 @@ function SignUp() {
             return;
         };
         //  CHECK IF USERNAME ALREADY TAKEN BEFORE SIGNING UP
-        refetch();
+        const test = await refetch();
         if (!isError) {
             console.log("it returns here")
             setUsernameError(true)
