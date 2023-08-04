@@ -34,8 +34,8 @@ function SignUp() {
     });
 
     // GET USERS TO CHCECK IF USERNAME ALREADY EXIST
-    const {data, isError, refetch} = UseGetUser(username);
-
+    const {data, isSuccess, refetch} = UseGetUser(username);
+   
     if (signUpComplete) {
         return <Navigate to={"/login"} />
     }
@@ -73,8 +73,8 @@ function SignUp() {
             return;
         };
         //  CHECK IF USERNAME ALREADY TAKEN BEFORE SIGNING UP
-        const test = await refetch();
-        if (!isError) {
+        const test = refetch();
+        if (isSuccess) {
             console.log("it returns here")
             setUsernameError(true)
             return;
@@ -117,7 +117,7 @@ function SignUp() {
         <>
             <Navbar />
             <div className="form-container">
-                <h1>Sign up page</h1>
+                <h1>Sign Up</h1>
                 <form>
                     <div className="inputfield">
                         {/* <label>username</label> */}

@@ -24,7 +24,6 @@ export const UseGetUser = (username: string) => {
         queryKey: ['getuser', username],
         enabled: false,
         queryFn: async() => {
-            console.log(url)
             const {data} = await axios.get(`http://127.0.0.1:8000/user/${username}/`)
             return data
         }
