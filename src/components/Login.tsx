@@ -56,7 +56,6 @@ function Login() {
                 </div>
                 <input  className="signup-button" type="submit" onClick={handleLogin} value="Login"/>
             </form>
-            <p className="no-account-text">Not a account yet <span className="create-account" onClick={() => setSignUp(true)}>Sign up</span></p>
         </div>
         </>
         

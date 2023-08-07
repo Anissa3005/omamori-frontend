@@ -115,7 +115,6 @@ function SignUp() {
    
     return (
         <>
-            <Navbar />
             <div className="form-container">
                 <h1 className="title-login-signup">Sign Up</h1>
                 <form>
