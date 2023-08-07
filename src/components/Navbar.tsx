@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
 import LoginModal from "./Login_Modal";
+import Login from "./Login"
 import "./Navbar.css";
+import "./Login_Modal.css"
 
 
 function Home() {
     const [hamburger, setHamburger] = useState<boolean>(true);
     const [login, setLogin] = useState<boolean>(false);
     const [openLogin, setOpenLogin] = useState<boolean>(false);
+
+    useEffect(() => {
+        console.log(openLogin)
+    }, [openLogin])
 
     if (login) {
         return <Navigate to={"/login"} />
@@ -30,11 +36,18 @@ function Home() {
                         </ul>
                     </div> 
                 <ul className="nav-list-desktop">
-                    <li className="nav-topic" onClick={() => setOpenLogin(!openLogin)}>Login</li>
+                    <li className="nav-topic" onClick={() =>  setOpenLogin(true)}>Login</li>
                     <li className="nav-topic">About</li>
                 </ul>
             </header>
-            {openLogin && (<LoginModal />)}
+            {openLogin && (
+                <div className="overlay">
+                    <div className="modal">
+                        <FontAwesomeIcon className="xmark" icon={faXmark} onClick={() => setOpenLogin(false)}/>
+                        <Login />
+                    </div>
+                </div>
+             )}
         </div>
     )
 };
