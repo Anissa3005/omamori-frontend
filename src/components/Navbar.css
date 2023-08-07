@@ -92,6 +92,7 @@ nav {
     right: 0;
     margin-right: 0.4em;
     margin-top: 0.3em;
+    cursor: pointer;
 }
 
 .overlay {
