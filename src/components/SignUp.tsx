@@ -6,7 +6,7 @@ import { useMutation} from "@tanstack/react-query";
 import axios from "axios";
 import {auth} from "../firebase-config"
 import { UseGetUser} from "../hooks/post";
-import "./SignUp.css"
+import "./SignUp_Login.css"
 
 interface User {
     username: string,
@@ -117,7 +117,7 @@ function SignUp() {
         <>
             <Navbar />
             <div className="form-container">
-                <h1>Sign Up</h1>
+                <h1 className="title-login-signup">Sign Up</h1>
                 <form>
                     <div className="inputfield">
                         {/* <label>username</label> */}

@@ -9,6 +9,7 @@ function Login() {
     const [signUp, setSignUp] = useState<boolean>(false);
     const [password, setPassword] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [userNotExist, setUserNotExist] = useState<boolean>(false);
 
     if (signUp) {
         return <Navigate to={"/signup"} />
@@ -18,6 +19,7 @@ function Login() {
         e.preventDefault();
         let input = e.target.value;
         setEmail(input);
+        setUserNotExist(false);
     };
 
     const handlePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -32,26 +34,32 @@ function Login() {
             const login = await signInWithEmailAndPassword(auth, email, password)
             alert("login was succesful")
         } catch (error: any) {
+            // auth/invalid-email
+            if (error.code === "auth/invalid-email") {
+                setUserNotExist(true);
+            }
             console.log("firebase error message", error.message)
+            console.log("firebase error code", error.code)
         }
     }
 
     return (
         <>
         <Navbar />
-        <form>
-            <h1>Login</h1>
-            <div>
-                <label>email</label>
-                <input type="email" onChange={handleEmail} placeholder="Email"/>
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" onChange={handlePassword} placeholder="Password"/>
-            </div>
-            <input type="submit" onClick={handleLogin}/>
-        </form>
-        <p>Not a account yet <span onClick={() => setSignUp(!signUp)}>Sign up</span></p>
+        <div className="form-container">
+            <h1 className="title-login-signup">Login</h1>
+            <form>
+                <div>
+                    {userNotExist && (<p className="error-message">*User doesn't exist</p>)}
+                    <input className={userNotExist ? "input-error" : "input"} type="email" onChange={handleEmail} placeholder="Email"/>
+                </div>
+                <div>
+                    <input className="input" type="password" onChange={handlePassword} placeholder="Password"/>
+                </div>
+                <input  className="signup-button" type="submit" onClick={handleLogin} value="Login"/>
+            </form>
+            <p className="no-account-text">Not a account yet <span className="create-account" onClick={() => setSignUp(true)}>Sign up</span></p>
+        </div>
         </>
         
     )

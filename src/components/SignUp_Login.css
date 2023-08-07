@@ -1,7 +1,8 @@
 /* font-family: 'Lora', serif; */
-h1 {
+.title-login-signup {
     font-family: 'Lora', serif;
 }
+
 .form-container {
     margin-top: 2em;
     display: flex;
@@ -66,4 +67,16 @@ form {
     /* font-size: 12px; */
     background-color: white;
     border:2px solid var(--light-green)
+}
+
+.no-account-text {
+    margin-top: 1em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.create-account {
+    color: var(--dark-green);
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 1px var(--dark-green) solid;
 }
