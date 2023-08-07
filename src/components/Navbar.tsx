@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
-import Login from "./Login";
+import LoginModal from "./Login_Modal";
 import "./Navbar.css";
 
 
 function Home() {
-    const [isLogin, setIsLogin] = useState<boolean>(true)
-    const [hamburger, setHamburger] = useState<boolean>(true)
-    const [login, setLogin] = useState<boolean>(false)
+    const [hamburger, setHamburger] = useState<boolean>(true);
+    const [login, setLogin] = useState<boolean>(false);
+    const [openLogin, setOpenLogin] = useState<boolean>(false);
 
     if (login) {
         return <Navigate to={"/login"} />
@@ -30,10 +30,11 @@ function Home() {
                         </ul>
                     </div> 
                 <ul className="nav-list-desktop">
-                    <li className="nav-topic">Login</li>
+                    <li className="nav-topic" onClick={() => setOpenLogin(!openLogin)}>Login</li>
                     <li className="nav-topic">About</li>
                 </ul>
             </header>
+            {openLogin && (<LoginModal />)}
         </div>
     )
 };

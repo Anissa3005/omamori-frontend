@@ -45,7 +45,6 @@ function Login() {
 
     return (
         <>
-        <Navbar />
         <div className="form-container">
             <h1 className="title-login-signup">Login</h1>
             <form>
