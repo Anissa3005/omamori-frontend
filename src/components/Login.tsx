@@ -9,9 +9,14 @@ function Login() {
     const [password, setPassword] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [userNotExist, setUserNotExist] = useState<boolean>(false);
+    const [loginSuccesful, setLoginSuccesful] = useState<boolean>(false);
 
     if (signUp) {
         return <Navigate to={"/signup"} />
+    }
+
+    if (loginSuccesful) {
+        return <Navigate to={"/home"} />
     }
 
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -32,8 +37,9 @@ function Login() {
         try {
             const login = await signInWithEmailAndPassword(auth, email, password)
             alert("login was succesful")
+            setLoginSuccesful(true);
+
         } catch (error: any) {
-            // auth/invalid-email
             if (error.code === "auth/invalid-email") {
                 setUserNotExist(true);
             }

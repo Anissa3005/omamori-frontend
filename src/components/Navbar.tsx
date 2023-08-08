@@ -58,22 +58,26 @@ function Home() {
                 </ul>
             </header>
             {openLogin && (
-                <div className="overlay" onClick={() => setOpenLogin(false)}>
+                <>
+                    <div className="overlay" onClick={() => setOpenLogin(false)} />
                     <div className="modal">
                         <FontAwesomeIcon className="xmark" icon={faXmark} onClick={() => setOpenLogin(false)}/>
                         <Login />
                         <p className="no-account-text">Not a account yet <span className="create-account" onClick={() => {setOpenSignUp(true); setOpenLogin(false)}}>Sign up</span></p>
                     </div>
-                </div>
+                </>
+            
              )}
              {openSignUp && (
-                <div className="overlay" onClick={() => setOpenSignUp(false)}>
-                <div className="modal">
-                    <FontAwesomeIcon className="xmark" icon={faXmark} onClick={() => setOpenSignUp(false)}/>
-                    <SignUp />
-                    <p className="no-account-text">Already an account <span className="create-account" onClick={() => {setOpenLogin(true); setOpenSignUp(false);}}>Login</span></p>
-                </div>
-                </div>
+                <>
+                    <div className="overlay" onClick={() => setOpenSignUp(false)} />
+                    <div className="modal">
+                        <FontAwesomeIcon className="xmark" icon={faXmark} onClick={() => setOpenSignUp(false)}/>
+                        <SignUp />
+                        <p className="no-account-text">Already an account <span className="create-account" onClick={() => {setOpenLogin(true); setOpenSignUp(false);}}>Login</span></p>
+                    </div>
+                </>
+               
                
              )}
         </div>
