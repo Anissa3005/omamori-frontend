@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useMutation} from "@tanstack/react-query";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../firebase-config"
+import axios from "axios";
+import { useGetUserByMail } from "../hooks/post";
+import { UserContext } from "../context/UserContext";
 
 
 function Login() {
@@ -10,14 +14,23 @@ function Login() {
     const [email, setEmail] = useState<string>('');
     const [userNotExist, setUserNotExist] = useState<boolean>(false);
     const [loginSuccesful, setLoginSuccesful] = useState<boolean>(false);
+    const {userName, setUserName, userId, setUserId} = useContext(UserContext);
+
+    const {data: usersInfo,  mutate, isSuccess } = useGetUserByMail();
+
+    if (isSuccess) {
+        setUserName(usersInfo.username)
+        setUserId(usersInfo.id)
+        console.log("username", userName, "id", userId)
+    }
 
     if (signUp) {
         return <Navigate to={"/signup"} />
     }
 
-    if (loginSuccesful) {
-        return <Navigate to={"/home"} />
-    }
+    // if (loginSuccesful) {
+    //     return <Navigate to={"/home"} />
+    // }
 
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
         e.preventDefault();
@@ -36,8 +49,11 @@ function Login() {
         e.preventDefault();
         try {
             const login = await signInWithEmailAndPassword(auth, email, password)
-            alert("login was succesful")
+            mutate({email: email})
+           
+            // alert("login was succesful")
             setLoginSuccesful(true);
+
 
         } catch (error: any) {
             if (error.code === "auth/invalid-email") {
