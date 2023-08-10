@@ -21,16 +21,15 @@ function Login() {
     if (isSuccess) {
         setUserName(usersInfo.username)
         setUserId(usersInfo.id)
-        console.log("username", userName, "id", userId)
     }
 
     if (signUp) {
         return <Navigate to={"/signup"} />
     }
 
-    // if (loginSuccesful) {
-    //     return <Navigate to={"/home"} />
-    // }
+    if (loginSuccesful) {
+        return <Navigate to={"/home"} />
+    }
 
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
         e.preventDefault();
