@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark, faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Login from "./Login";
@@ -42,6 +42,14 @@ function Home() {
         return <Navigate to={"/signup"} />
     }
 
+    const handleDisplayDropdown = (): void =>{
+        setDropdown(true)
+    }
+
+    const handleRemoveDisplayDropdown = (): void => {
+        setDropdown(false)
+    }
+
     return (
         <div>
             <header>
@@ -67,11 +75,11 @@ function Home() {
                 <ul className="nav-list-desktop">
                     <li className="nav-topic">About</li>
                     {userLoggedIn 
-                    ? (<li className="nav-topic" onClick={() => setDropdown(!dropdown)}>{userName} <FontAwesomeIcon icon={faChevronDown} /></li> )
+                    ? (<li className="nav-topic" onMouseEnter={handleDisplayDropdown} onMouseLeave={handleRemoveDisplayDropdown}>{userName} {dropdown? <FontAwesomeIcon className="chevron-down" icon={faChevronDown} /> : <FontAwesomeIcon className="chevron-right" icon={faChevronRight} />}</li> )
                     : (<li className="nav-topic" onClick={() =>  setOpenLogin(true)}>Login</li>)}
                 </ul>
             </header>
-            {dropdown && <Dropdown text={"Sign Out"}/> }
+            {dropdown && <Dropdown text={"Sign Out"} onMouseEnter={handleDisplayDropdown} onMouseLeave={handleRemoveDisplayDropdown}/> }
             {openLogin && (
                 <>
                     <div className={userLoggedIn ? "logged-in" : "overlay"} onClick={() => setOpenLogin(false)} />
@@ -85,7 +93,7 @@ function Home() {
              )}
              {openSignUp && (
                 <>
-                    <div className="overlay" onClick={() => setOpenSignUp(false)} />
+                    <div className="overlay"/>
                     <div className="modal">
                         <FontAwesomeIcon className="xmark" icon={faXmark} onClick={() => setOpenSignUp(false)}/>
                         <SignUp />

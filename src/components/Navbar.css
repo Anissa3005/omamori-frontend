@@ -158,5 +158,12 @@ nav {
         z-index: 1000;
     }
 
-  
+    .chevron-right {
+        font-size: 15px;
+    }
+    
+    .chevron-down {
+        font-size: 15px;
+        
+    }
 }
