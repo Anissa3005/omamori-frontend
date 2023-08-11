@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import "./Navbar.css";
+import Dropdown from "./Dropdown";
+import { signOut } from "firebase/auth";
 // import "./Login_Modal.css"
 
 
@@ -16,6 +18,7 @@ function Home() {
     const [openSignUp, setOpenSignUp] = useState<boolean>(false);
     const [backHome, setBackHome] = useState<boolean>(false);
     const [signUp, setSignUp] = useState<boolean>(false);
+    const [dropdown, setDropdown] = useState<boolean>(false);
     const {userName, userLoggedIn} = useContext(UserContext);
 
     // useEffect(() => {
@@ -62,13 +65,13 @@ function Home() {
                         </ul>
                     </div> 
                 <ul className="nav-list-desktop">
-                    {userLoggedIn 
-                    ? (<li className="nav-topic">{userName}</li> )
-                    : (<li className="nav-topic" onClick={() =>  setOpenLogin(true)}>Login</li>)}
-                    
                     <li className="nav-topic">About</li>
+                    {userLoggedIn 
+                    ? (<li className="nav-topic" onClick={() => setDropdown(!dropdown)}>{userName} <FontAwesomeIcon icon={faChevronDown} /></li> )
+                    : (<li className="nav-topic" onClick={() =>  setOpenLogin(true)}>Login</li>)}
                 </ul>
             </header>
+            {dropdown && <Dropdown text={"Sign Out"}/> }
             {openLogin && (
                 <>
                     <div className={userLoggedIn ? "logged-in" : "overlay"} onClick={() => setOpenLogin(false)} />

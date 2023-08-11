@@ -1,0 +1,21 @@
+.dropdown-box {
+    position: fixed;
+    right: 0;
+    top: 3em;
+    border: 1px solid red;
+    width: 20%;
+    padding: 1em 0em 1em 0em;
+    background-color: white;
+    margin-right: 0.3em;
+    border-radius: 3px;
+}
+
+.menu-element {
+    list-style: none;
+    margin-left: 0.4em;
+}
+
+.menu-element:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
