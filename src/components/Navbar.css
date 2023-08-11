@@ -76,34 +76,21 @@ nav {
     display: none;
 }
 
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    padding: 0em 3em 4em 3em;
-    background-color: white;
-    border-radius: 5px;
+.logged-in {
+    display: none;
+}
+
+/* .modal {
+    display: none;
 }
 
 .modal > .xmark {
-    position: fixed;
-    right: 0;
-    margin-right: 0.4em;
-    margin-top: 0.3em;
-    cursor: pointer;
+   display: none;
 }
 
 .overlay {
-    position: fixed;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0,0,0,0.4);
-    z-index: 1000;
-}
+  display: none;
+} */
 
 @media screen and (min-width: 1000px) {
     .hamburger-menu {
@@ -141,4 +128,35 @@ nav {
         cursor: pointer;
         transition: 0.3s ease-in;
    }
+
+   .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        padding: 0em 3em 4em 3em;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .modal > .xmark {
+        position: fixed;
+        right: 0;
+        margin-right: 0.4em;
+        margin-top: 0.3em;
+        cursor: pointer;
+    }
+
+    .overlay {
+        position: fixed;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0,0.4);
+        z-index: 1000;
+    }
+
+  
 }

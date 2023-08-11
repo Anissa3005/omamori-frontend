@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import "./Navbar.css";
@@ -15,10 +16,12 @@ function Home() {
     const [openSignUp, setOpenSignUp] = useState<boolean>(false);
     const [backHome, setBackHome] = useState<boolean>(false);
     const [signUp, setSignUp] = useState<boolean>(false);
+    const {userName, userLoggedIn} = useContext(UserContext);
 
     // useEffect(() => {
-    //     console.log("open Login is", openLogin)
-    // }, [openLogin])
+    //     console.log("user logged in", userLoggedIn)
+    //     console.log("username:", userName)
+    // }, [userLoggedIn, userName])
 
     // useEffect(() => {
     //     console.log("open Signup is", openSignUp)
@@ -46,21 +49,30 @@ function Home() {
                             <FontAwesomeIcon className="xmark"  onClick={() => setHamburger(!hamburger)} icon={faXmark} /> 
                         </div>
                         <ul className="nav-list">
-                            <li className="nav-topic" onClick={() => setLogin(true)}>Login</li>
-                            <li className="nav-topic"  onClick={() => setSignUp(true)}>Sign Up</li>
+                            {userLoggedIn
+                            ? (<li className="nav-topic">{userName}</li>) 
+                            : ( <>
+                                    <li className="nav-topic" onClick={() => setLogin(true)}>Login</li>
+                                    <li className="nav-topic"  onClick={() => setSignUp(true)}>Sign Up</li>
+                                </>
+                            )}
+                            
                             <li className="nav-topic">About</li>
                             <li className="nav-topic" onClick={() => setBackHome(true)}>Home</li>
                         </ul>
                     </div> 
                 <ul className="nav-list-desktop">
-                    <li className="nav-topic" onClick={() =>  setOpenLogin(true)}>Login</li>
+                    {userLoggedIn 
+                    ? (<li className="nav-topic">{userName}</li> )
+                    : (<li className="nav-topic" onClick={() =>  setOpenLogin(true)}>Login</li>)}
+                    
                     <li className="nav-topic">About</li>
                 </ul>
             </header>
             {openLogin && (
                 <>
-                    <div className="overlay" onClick={() => setOpenLogin(false)} />
-                    <div className="modal">
+                    <div className={userLoggedIn ? "logged-in" : "overlay"} onClick={() => setOpenLogin(false)} />
+                    <div className={userLoggedIn ? "logged-in" : "modal"}>
                         <FontAwesomeIcon className="xmark" icon={faXmark} onClick={() => setOpenLogin(false)}/>
                         <Login />
                         <p className="no-account-text">Not a account yet <span className="create-account" onClick={() => {setOpenSignUp(true); setOpenLogin(false)}}>Sign up</span></p>

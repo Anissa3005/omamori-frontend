@@ -14,13 +14,14 @@ function Login() {
     const [email, setEmail] = useState<string>('');
     const [userNotExist, setUserNotExist] = useState<boolean>(false);
     const [loginSuccesful, setLoginSuccesful] = useState<boolean>(false);
-    const {userName, setUserName, userId, setUserId} = useContext(UserContext);
+    const {setUserName, setUserId, setUserLoggedIn} = useContext(UserContext);
 
     const {data: usersInfo,  mutate, isSuccess } = useGetUserByMail();
 
     if (isSuccess) {
         setUserName(usersInfo.username)
         setUserId(usersInfo.id)
+        setUserLoggedIn(true)
     }
 
     if (signUp) {
