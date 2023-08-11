@@ -21,7 +21,6 @@ function Login() {
     if (isSuccess) {
         setUserName(usersInfo.username)
         setUserId(usersInfo.id)
-        setUserLoggedIn(true)
     }
 
     if (signUp) {
@@ -53,7 +52,6 @@ function Login() {
            
             // alert("login was succesful")
             setLoginSuccesful(true);
-
 
         } catch (error: any) {
             if (error.code === "auth/invalid-email") {

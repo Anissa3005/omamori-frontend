@@ -19,7 +19,7 @@ function Home() {
     const [backHome, setBackHome] = useState<boolean>(false);
     const [signUp, setSignUp] = useState<boolean>(false);
     const [dropdown, setDropdown] = useState<boolean>(false);
-    const {userName, userLoggedIn} = useContext(UserContext);
+    const {userName, userLoggedIn, setUserLoggedIn} = useContext(UserContext);
 
     // useEffect(() => {
     //     console.log("user logged in", userLoggedIn)
@@ -27,8 +27,8 @@ function Home() {
     // }, [userLoggedIn, userName])
 
     // useEffect(() => {
-    //     console.log("open Signup is", openSignUp)
-    // }, [openSignUp])
+    //     console.log("open user loged in", userLoggedIn)
+    // }, [userLoggedIn])
 
     if (login) {
         return <Navigate to={"/login"} />
