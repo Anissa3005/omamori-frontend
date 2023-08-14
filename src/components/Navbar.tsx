@@ -11,7 +11,7 @@ import SignUp from "./SignUp";
 import "./Navbar.css";
 import Dropdown from "./Dropdown";
 import { userInfo } from "os";
-// import { signOut } from "firebase/auth";
+
 // import "./Login_Modal.css"
 
 
@@ -26,19 +26,22 @@ function Home() {
     const {userName, userLoggedIn, setUserLoggedIn, setUserName, setUserId,} = useContext(UserContext);
     const [userEmail, setUserEmail] = useState<string | null>(null)
 
-    const {data: usersInfo,  mutate, isSuccess } = useGetUserByMail();
+    const {data: usersInfo, mutate, isSuccess } = useGetUserByMail();
+    
+    useEffect(() => {
+        if (usersInfo) {
+            setUserName(usersInfo.username)
+            setUserId(usersInfo.id);
+        }
+    })
+   
 
     useEffect(() =>{
         if(userEmail) {
             mutate({
                 email: userEmail
-            })
+            });
         };
-
-        if(usersInfo) {
-            setUserName(usersInfo.username);
-            setUserId(usersInfo.id)
-        }
     }, [userEmail])
 
     useEffect(() => {
@@ -46,19 +49,12 @@ function Home() {
             if(user) {
                 setUserLoggedIn(true)
                 setUserEmail(user.email)
+               
             } else {
                 setUserLoggedIn(false)
             }
         })
     })
-    // useEffect(() => {
-    //     console.log("user logged in", userLoggedIn)
-    //     console.log("username:", userName)
-    // }, [userLoggedIn, userName])
-
-    // useEffect(() => {
-    //     console.log("open user loged in", userLoggedIn)
-    // }, [userLoggedIn])
 
     if (login) {
         return <Navigate to={"/login"} />
