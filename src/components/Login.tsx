@@ -14,14 +14,13 @@ function Login() {
     const [email, setEmail] = useState<string>('');
     const [userNotExist, setUserNotExist] = useState<boolean>(false);
     const [loginSuccesful, setLoginSuccesful] = useState<boolean>(false);
-    const {setUserName, setUserId, setUserLoggedIn} = useContext(UserContext);
 
-    const {data: usersInfo,  mutate, isSuccess } = useGetUserByMail();
+    
 
-    if (isSuccess) {
-        setUserName(usersInfo.username)
-        setUserId(usersInfo.id)
-    }
+    // if (isSuccess) {
+    //     setUserName(usersInfo.username)
+    //     setUserId(usersInfo.id)
+    // }
 
     if (signUp) {
         return <Navigate to={"/signup"} />
@@ -48,7 +47,7 @@ function Login() {
         e.preventDefault();
         try {
             const login = await signInWithEmailAndPassword(auth, email, password)
-            mutate({email: email})
+    
            
             // alert("login was succesful")
             setLoginSuccesful(true);

@@ -3,11 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark, faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase-config';
+import { useGetUserByMail} from "../hooks/post";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import "./Navbar.css";
 import Dropdown from "./Dropdown";
-import { signOut } from "firebase/auth";
+import { userInfo } from "os";
+// import { signOut } from "firebase/auth";
 // import "./Login_Modal.css"
 
 
@@ -19,8 +23,34 @@ function Home() {
     const [backHome, setBackHome] = useState<boolean>(false);
     const [signUp, setSignUp] = useState<boolean>(false);
     const [dropdown, setDropdown] = useState<boolean>(false);
-    const {userName, userLoggedIn, setUserLoggedIn} = useContext(UserContext);
+    const {userName, userLoggedIn, setUserLoggedIn, setUserName, setUserId,} = useContext(UserContext);
+    const [userEmail, setUserEmail] = useState<string | null>(null)
 
+    const {data: usersInfo,  mutate, isSuccess } = useGetUserByMail();
+
+    useEffect(() =>{
+        if(userEmail) {
+            mutate({
+                email: userEmail
+            })
+        };
+
+        if(usersInfo) {
+            setUserName(usersInfo.username);
+            setUserId(usersInfo.id)
+        }
+    }, [userEmail])
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) =>{
+            if(user) {
+                setUserLoggedIn(true)
+                setUserEmail(user.email)
+            } else {
+                setUserLoggedIn(false)
+            }
+        })
+    })
     // useEffect(() => {
     //     console.log("user logged in", userLoggedIn)
     //     console.log("username:", userName)
