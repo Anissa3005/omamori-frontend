@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark, faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { useGetUserByMail} from "../hooks/post";
 import Login from "./Login";
@@ -35,7 +35,6 @@ function Home() {
         }
     })
    
-
     useEffect(() =>{
         if(userEmail) {
             mutate({
@@ -87,7 +86,10 @@ function Home() {
                         </div>
                         <ul className="nav-list">
                             {userLoggedIn
-                            ? (<li className="nav-topic">{userName}</li>) 
+                            ? ( <>
+                                    <li className="nav-topic">{userName}</li>
+                                    <li className="nav-topic" onClick={async() => await signOut(auth)}>Sign Out</li>
+                                </>) 
                             : ( <>
                                     <li className="nav-topic" onClick={() => setLogin(true)}>Login</li>
                                     <li className="nav-topic"  onClick={() => setSignUp(true)}>Sign Up</li>
