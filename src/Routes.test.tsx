@@ -1,3 +1,4 @@
+export default console.log("hello")
 // import "@testing-library/jest-dom";
 // import { render, screen } from "@testing-library/react";
 // import { MemoryRouter } from "react-router-dom";

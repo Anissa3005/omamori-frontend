@@ -1,5 +1,6 @@
 import Navbar from "./Navbar"
 import Map from "./Map"
+import "./Home.css"
 
 
 
@@ -7,13 +8,15 @@ function Home() {
     return (
         <div>
             <Navbar />
-            <div>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam nemo atque pariatur, est omnis deleniti sint perferendis nobis totam. 
-                    Quidem optio mollitia architecto voluptatum quos? Labore ab consequatur illum voluptates.
-                </p>
+            <div className="grid-container">
+                <div className="container">
+                     <Map />
+                </div>
+                <div className="container">
+                    <p>upload</p>
+                </div>
             </div>
-            <Map />
+            
         </div>
         
 
