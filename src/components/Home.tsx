@@ -13,7 +13,7 @@ function Home() {
                      <Map />
                 </div>
                 <div className="container">
-                    <p>upload</p>
+                    <input type="file" />
                 </div>
             </div>
             
