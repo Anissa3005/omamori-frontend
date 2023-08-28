@@ -3,6 +3,7 @@ import "./Map.css";
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 
+
 function Map() {
     return (
         <div className="master-container">
