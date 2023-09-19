@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App';
-import Launch from './components/Launch';
+import App from '../App';
+import Launch from '../components/Launch';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 

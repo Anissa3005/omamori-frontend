@@ -8,12 +8,9 @@ import { auth } from './firebase-config';
 
 function App() {
   return (
-   
     <UserContextProvider>
       <RoutesComponent />
     </UserContextProvider>
-      
-   
   )
 }
 

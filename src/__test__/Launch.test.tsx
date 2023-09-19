@@ -1,5 +1,5 @@
 import { fireEvent, getByText, render } from "@testing-library/react"
-import Launch from "./Launch"
+import Launch from "../components/Launch"
 import { act } from "react-dom/test-utils";
 import userEvent from '@testing-library/user-event';
 
