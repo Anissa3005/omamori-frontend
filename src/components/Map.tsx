@@ -3,9 +3,10 @@ import "./Map.css"
 import "leaflet-geosearch/dist/geosearch.css"
 import pin from "../assets/pin.png"
 import { useEffect, useState } from "react";
-import { Icon, map, } from "leaflet"
+import { Icon } from "leaflet"
 import { MapContainer, TileLayer, useMap} from "react-leaflet"
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch"
+import { useGetOmamoriPhotos } from "../hooks/post";
 
 const customIcon = new Icon({
     iconUrl: pin,
@@ -26,6 +27,15 @@ function Map() {
                 icon: customIcon
             },
             popupFormat: (result: any) => result.label
+            // showMarker={true}
+            // showPopup={false}
+            // popupFormat={(result: any) => result.label}
+            // maxMarkers={3}
+            // retainZoomLevel={false}
+            // animateZoom={true}
+            // autoClose={false}
+            // searchLabel={"Enter address, please"}
+            // keepResult={true}
         })
     
         map.on("geosearch/showlocation", (result: any) => {
@@ -49,17 +59,7 @@ function Map() {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <SearchControl
-                    // showMarker={true}
-                    // showPopup={false}
-                    // popupFormat={(result: any) => result.label}
-                    // maxMarkers={3}
-                    // retainZoomLevel={false}
-                    // animateZoom={true}
-                    // autoClose={false}
-                    // searchLabel={"Enter address, please"}
-                    // keepResult={true}
-                />
+                <SearchControl />
             </MapContainer>
         </div>
     )

@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { FC } from "react";
 
 interface User {
     username: string,
@@ -19,12 +18,10 @@ export const usePostUser = (body: User) => {
             return data
         }
     })
-
     return {data, isLoading}
 }
 
 export const UseGetUser = (username: string) => {
-    const url = `http://127.0.0.1:8000/user/${username}/`
     return useQuery({
         queryKey: ['getuser', username],
         enabled: false,
@@ -39,6 +36,16 @@ export const useGetUserByMail = () => {
     return useMutation({
         mutationFn: async(email: Email) => {
             const {data} = await axios.post('http://127.0.0.1:8000/user/email/', email)
+            return data
+        }
+    })
+}
+
+export const useGetOmamoriPhotos = () => {
+    return useQuery({
+        queryKey: ['getOmamaoriPhoto'],
+        queryFn: async() => {
+            const {data} = await axios.get(`http://127.0.0.1:8000/omamori/`)
             return data
         }
     })
