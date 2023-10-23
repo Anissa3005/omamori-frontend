@@ -25,9 +25,7 @@ function Map() {
             marker: {
                 icon: customIcon
             },
-            popupFormat: (result: any) => {
-                return <p>{result.label}</p>
-            }
+            popupFormat: (result: any) => result.label
         })
     
         map.on("geosearch/showlocation", (result: any) => {
