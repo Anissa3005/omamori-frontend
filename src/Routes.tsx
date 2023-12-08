@@ -1,6 +1,6 @@
 import { Routes as ReactRoutes, Route, Outlet } from "react-router-dom";
 import Launch from "./components/Launch"
-import Home from "./components/Home"
+import Home from "./pages/Home"
 import LoginMobile from "./components/Login_Mobile";
 import SignUpMobile from "./components/SignUp_Mobile";
 

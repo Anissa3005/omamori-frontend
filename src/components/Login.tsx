@@ -1,11 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { useMutation} from "@tanstack/react-query";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../firebase-config"
-import axios from "axios";
-import { useGetUserByMail } from "../hooks/post";
-import { UserContext } from "../context/UserContext";
+
 
 
 function Login() {

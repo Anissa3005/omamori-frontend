@@ -1,19 +1,20 @@
-.grid-container {
+/* .grid-container {
     margin-top: 1em;
     padding: 0.75em;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    /* column-gap: 10px; */
     height: 80vh;
-}
+} */
 
 .container {
     background-color: pink;
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
-@media screen and (min-width: 1000px) {
+/* @media screen and (min-width: 1000px) {
     .grid-container {
         grid-template-columns: repeat(2, 60% 40%);
     }
-}
+} */
