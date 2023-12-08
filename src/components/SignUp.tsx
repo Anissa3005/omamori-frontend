@@ -5,26 +5,22 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useMutation} from "@tanstack/react-query";
 import axios from "axios";
 import {auth} from "../firebase-config"
-import { UseGetUser} from "../hooks/post";
 import "./SignUp_Login.css"
 
 interface User {
-    username: string,
-    email: string
+    uuid: string
 }
 
 function SignUp() {
     // http://127.0.0.1:8000/
-    const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [emailError, setEmailError] = useState<boolean>(false);
-    const [usernameError, setUsernameError] = useState<boolean>(false);
     const [passwordError, setPasswordError] = useState<boolean>(false);
     const [signUpComplete, setSignUpComplete] = useState<boolean>(false);
 
    
-    // POST new user
+    // MAKE POST REQUEST 
     const createPostUser = useMutation({
         mutationKey: ['user'],
         mutationFn: async(body: User ) => {
@@ -33,19 +29,9 @@ function SignUp() {
         }
     });
 
-    // GET USERS TO CHCECK IF USERNAME ALREADY EXIST
-    const {data, isSuccess, refetch} = UseGetUser(username);
-   
     if (signUpComplete) {
         return <Navigate to={"/login"} />
     }
-    
-    const handleUsername = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        e.preventDefault();
-        let input: string = e.target.value
-        setUsername(input);
-        setUsernameError(false);
-    };
 
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
         e.preventDefault();
@@ -65,31 +51,24 @@ function SignUp() {
 
     const handleSignUp = async(e: React.MouseEvent): Promise<any> => {
         e.preventDefault()
-        console.log("signup clicked");
         try {
-        const emptyFields= checkEmptyFields(password, email, username);
-        if (emptyFields) {
-            console.log("one of the fields is empty")
-            return;
-        };
-        //  CHECK IF USERNAME ALREADY TAKEN BEFORE SIGNING UP
-        const test = refetch();
-        if (isSuccess) {
-            console.log("it returns here")
-            setUsernameError(true)
-            return;
-        };
-        // MAKING POST REQ TO FIREBASE
-        const register = await createUserWithEmailAndPassword(auth, email, password);
+            const emptyFields= checkEmptyFields(password, email);
 
-        // MAKING POST REQ TO BACKEND
-        createPostUser.mutate({
-            username: username,
-            email: email
-        })
+            if (emptyFields) {
+                console.log("one of the fields is empty")
+                return;
+            };
         
-        alert("creating account was succesful")
-        setSignUpComplete(true);
+            // MAKING POST REQ TO FIREBASE
+            const newUser = await createUserWithEmailAndPassword(auth, email, password);
+
+            // MAKING POST REQ TO BACKEND
+            const senback = await createPostUser.mutate({
+                uuid: newUser.user.uid
+            })
+            
+            alert("creating account was succesful")
+            setSignUpComplete(true);
 
         } catch (error: any) {
             if (error.code === "auth/email-already-in-use") {
@@ -100,29 +79,21 @@ function SignUp() {
                 setPasswordError(true)
             }
             console.log(`Failed with error code ${error.code}`)
-            console.log(error.message)
+            console.log('Error Message', error.message)
         }
     }
 
-    const checkEmptyFields = (password: string, email: string, username: string): boolean => {
+    const checkEmptyFields = (password: string, email: string): boolean => {
         if (password === "") setPasswordError(true);
         if (email === "") setEmailError(true);
-        if (username === "") setUsernameError(true);
-
-        return password === "" || email === "" || username === "";
+        return password === "" || email === "" 
     }
 
-   
     return (
         <>
             <div className="form-container">
                 <h1 className="title-login-signup">Sign Up</h1>
                 <form>
-                    <div className="inputfield">
-                        {/* <label>username</label> */}
-                        {usernameError && (<p className="error-message">*This username is already taken</p>)}
-                        <input className={usernameError ? "input-error" : "input"} type="text" onChange={handleUsername} placeholder="Username" required/>
-                    </div>
                     <div className="inputfield">
                         {/* <label>email</label> */}
                         {emailError && (<p className="error-message">*This email adress is already taken</p>)}

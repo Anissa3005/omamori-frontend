@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
-import { useGetUserByMail} from "../hooks/post";
+// import { useGetUserByMail} from "../hooks/post";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import "./Navbar.css";
@@ -26,22 +26,22 @@ function Home() {
     const {userName, userLoggedIn, setUserLoggedIn, setUserName, setUserId,} = useContext(UserContext);
     const [userEmail, setUserEmail] = useState<string | null>(null)
 
-    const {data: usersInfo, mutate, isSuccess } = useGetUserByMail();
+    // const {data: usersInfo, mutate, isSuccess } = useGetUserByMail();
     
-    useEffect(() => {
-        if (usersInfo) {
-            setUserName(usersInfo.username)
-            setUserId(usersInfo.id);
-        }
-    })
+    // useEffect(() => {
+    //     if (usersInfo) {
+    //         setUserName(usersInfo.username)
+    //         setUserId(usersInfo.id);
+    //     }
+    // })
    
-    useEffect(() =>{
-        if(userEmail) {
-            mutate({
-                email: userEmail
-            });
-        };
-    }, [userEmail])
+    // useEffect(() =>{
+    //     if(userEmail) {
+    //         mutate({
+    //             email: userEmail
+    //         });
+    //     };
+    // }, [userEmail])
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) =>{

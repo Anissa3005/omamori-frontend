@@ -1,5 +1,5 @@
-import Navbar from "./Navbar"
-import Map from "./Map"
+import Navbar from "../components/Navbar"
+import Map from "../components/Map"
 import "./Home.css"
 import { useState } from "react"
 
@@ -17,15 +17,14 @@ function Home() {
     return (
         <div>
             <Navbar />
-            <div className="grid-container">
                 <div className="container">
                      <Map />
                 </div>
-                <div className="container">
+                {/* <div className="container">
                     {newImage && <img src={newImage} height="400"/>}
                     <input type="file" onChange={handelImage} />
-                </div>
-            </div>
+                </div> */}
+
             
         </div>
         
